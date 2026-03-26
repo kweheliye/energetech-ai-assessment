@@ -20,7 +20,7 @@ client = TestClient(app)
 
 HEADERS = {"Content-Type": "text/plain"}
 
-# ── Fixture: sample agent response ───────────────────────────────────────────
+# Fixture: sample agent response
 
 MOCK_DEAL_RESPONSE = {
     "reference":           "ET-2026-0441",
@@ -51,7 +51,7 @@ MOCK_DEAL_RESPONSE = {
 SAMPLE_MEMO = "DEAL CONFIRMATION\nDate: 18 March 2026\nReference: ET-2026-0441"
 
 
-# ── Health check ──────────────────────────────────────────────────────────────
+# Health check
 
 def test_health_returns_ok():
     response = client.get("/health")
@@ -59,7 +59,7 @@ def test_health_returns_ok():
     assert response.json() == {"status": "ok"}
 
 
-# ── POST /process-deal — happy path ──────────────────────────────────────────
+# POST /process-deal — happy path
 
 def test_process_deal_returns_200():
     with patch("server.run_deal_agent", return_value=MOCK_DEAL_RESPONSE):
@@ -90,7 +90,7 @@ def test_process_deal_passes_memo_to_agent():
     mock_agent.assert_called_once_with(SAMPLE_MEMO)
 
 
-# ── POST /process-deal — validation errors ────────────────────────────────────
+# POST /process-deal — validation errors
 
 def test_process_deal_rejects_empty_body():
     with patch("server.run_deal_agent", return_value=MOCK_DEAL_RESPONSE):
@@ -104,7 +104,7 @@ def test_process_deal_rejects_short_memo():
     assert response.status_code == 422
 
 
-# ── POST /process-deal — agent parse failure ─────────────────────────────────
+# POST /process-deal — agent parse failure
 
 def test_process_deal_returns_422_on_parse_error():
     error_response = {"validation_flags": ["llm_response_parse_error"], "raw_response": "..."}
