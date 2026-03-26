@@ -21,7 +21,7 @@ app = FastAPI(
 )
 
 
-# ── Endpoints ─────────────────────────────────────────────────────────────────
+# Endpoints
 
 @app.get("/health")
 def health():
@@ -51,7 +51,7 @@ async def process_deal(request: Request):
     return result
 
 
-# ── Entry Point ───────────────────────────────────────────────────────────────
+# Entry Point
 
 if __name__ == "__main__":
     import uvicorn
