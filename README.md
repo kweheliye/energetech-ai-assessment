@@ -101,3 +101,4 @@ pytest tests/ -v
 - Retry with exponential backoff on API errors
 - Expanded test suite covering edge-case memos (missing fields, ambiguous dates, non-USD pricing)
 - Persist results to a database for audit trail and reporting
+- LangSmith tracing for chain observability and token usage
